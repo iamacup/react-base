@@ -1,5 +1,5 @@
 
-import pageMetaData from '../../content/bootstrap/pageMetaData';
+const pageMetaData = require('../../content/bootstrap/pageMetaData');
 
 module.exports = {
   host: process.env.NODE_HOST || '0.0.0.0', // Define your host from 'package.json'
