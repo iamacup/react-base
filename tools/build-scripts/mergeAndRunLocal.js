@@ -41,7 +41,7 @@ console.log('Starting sync');
 console.log( execSync("rm -rf workdir/src/content").toString() );
 console.log( execSync("rm -rf workdir/src/includes").toString() );
 
-console.log( execSync("cp -r src/includes workdir/src/includes").toString() );
+console.log( execSync("cp -r src/includes workdir/src/includes 2>/dev/null || :").toString() );
 
 
 // we execute this syncronously
