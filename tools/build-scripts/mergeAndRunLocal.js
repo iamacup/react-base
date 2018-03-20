@@ -31,7 +31,7 @@ let result = mergePackages.yarn(template, pkgPaths, "./workdir/");
 // install the dependencies
 console.log('running yarn install');
 
-console.log( execSync("pushd ./workdir && yarn install").toString() );
+console.log( execSync("cd ./workdir && yarn install").toString() );
 
 
 
