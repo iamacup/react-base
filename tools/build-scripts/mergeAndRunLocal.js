@@ -12,7 +12,7 @@ let template = require('./package.json');
 // move the base package
 console.log('moving the base package');
 
-console.log( execSync("rm -rf workdir && mkdir workdir && cp -r ./node_modules/react-base/* workdir").toString() );
+console.log( execSync("rm -rf workdir && mkdir workdir && cp -r ./node_modules/react-base/. workdir").toString() );
 
 
 

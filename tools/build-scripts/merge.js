@@ -14,11 +14,6 @@ console.log('moving the base package');
 
 console.log( execSync("rm -rf workdir && mkdir workdir && cp -r ./node_modules/react-base/. workdir").toString() );
 
-console.log('LOGGING REACT BASE');
-console.log( execSync("ls -a ./node_modules/react-base").toString() );
-
-console.log('LOGGING WORKDIR');
-console.log( execSync("ls -a ./workdir").toString() );
 
 
 // do the merge of the package.json
