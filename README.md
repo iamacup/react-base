@@ -10,7 +10,7 @@
 What is this?
 -------
 
-This is a base package for a react server side render application.
+This is a base package for a react server side render application - see sliips-web, alumnibase-web, alumnibase-survey or alumnibase-data for example IMPLEMENTATION
 
 Getting Started
 -------
