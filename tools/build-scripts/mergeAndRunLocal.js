@@ -23,7 +23,7 @@ let pkgPaths = [
     "./node_modules/react-base/"
 ];
 
-console.log( execSync("rm workdir/package.json").toString() );
+console.log( execSync("rm -rf workdir/package.json").toString() );
 let result = mergePackages.yarn(template, pkgPaths, "./workdir/");
 
 
