@@ -1,4 +1,6 @@
 
+console.log('THIS IS A v2 FILE');
+
 var execSync = require('child_process').execSync;
 var exec = require('child_process').exec;
 const { spawn } = require('child_process');
