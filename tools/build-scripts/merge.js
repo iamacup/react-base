@@ -1,5 +1,5 @@
 
-console.log('THIS IS A v2 FILE');
+console.log('THIS IS A v3 FILE');
 
 var execSync = require('child_process').execSync;
 var exec = require('child_process').exec;
@@ -44,9 +44,15 @@ console.log( execSync("rm -rf workdir/src/content").toString() );
 // we execute this syncronously
 //exec("yarn sync-files --watch src/content workdir/src/content");
 
+console.log('print work directory');
 console.log( execSync("pwd").toString() );
+console.log('LISTING .');
 console.log( execSync("ls -a").toString() );
+console.log('LISTING src');
 console.log( execSync("ls -a src/").toString() );
+console.log('LISTING workdir');
+console.log( execSync("ls -a workdir/").toString() );
+console.log('LISTING workdir/src');
 console.log( execSync("ls -a workdir/src/").toString() );
 
 console.log( execSync("cp -r src/content workdir/src/content").toString() );
