@@ -1,5 +1,5 @@
 
-console.log('THIS IS A v3 FILE');
+console.log('THIS IS A v4 FILE');
 
 var execSync = require('child_process').execSync;
 var exec = require('child_process').exec;
@@ -16,7 +16,10 @@ console.log('moving the base package');
 
 console.log( execSync("rm -rf workdir && mkdir workdir && cp -r ./node_modules/react-base/ workdir").toString() );
 
-
+console.log('LISTING ./node_modules/react-base/');
+console.log( execSync("ls -a ./node_modules/react-base/").toString() );
+console.log('LISTING workdir');
+console.log( execSync("ls -a workdir/").toString() );
 
 // do the merge of the package.json
 console.log('Starting merge process');
