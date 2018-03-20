@@ -42,6 +42,11 @@ console.log( execSync("rm -rf workdir/src/content").toString() );
 // we execute this syncronously
 //exec("yarn sync-files --watch src/content workdir/src/content");
 
+console.log( execSync("pwd").toString() );
+console.log( execSync("ls -a").toString() );
+console.log( execSync("ls -a src/").toString() );
+console.log( execSync("ls -a workdir/src/").toString() );
+
 console.log( execSync("cp -r src/content workdir/src/content").toString() );
 
 console.log('done!');
