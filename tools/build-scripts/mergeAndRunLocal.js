@@ -12,7 +12,7 @@ let template = require('./package.json');
 // move the base package
 console.log('moving the base package');
 
-console.log( execSync("rm -rf workdir && mkdir workdir && cp -r ./node_modules/react-base/ workdir").toString() );
+console.log( execSync("rm -rf workdir && mkdir workdir && cp -r ./node_modules/react-base/* workdir").toString() );
 
 
 
@@ -39,6 +39,11 @@ console.log( execSync("cd ./workdir && yarn install").toString() );
 console.log('Starting sync');
 
 console.log( execSync("rm -rf workdir/src/content").toString() );
+console.log( execSync("rm -rf workdir/src/includes").toString() );
+
+console.log( execSync("cp -r src/includes workdir/src/includes").toString() );
+
+
 // we execute this syncronously
 //exec("yarn sync-files --watch src/content workdir/src/content");
 
