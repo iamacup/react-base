@@ -1,5 +1,5 @@
 
-console.log('THIS IS A v4 FILE');
+console.log('THIS IS A v6 FILE');
 
 var execSync = require('child_process').execSync;
 var exec = require('child_process').exec;
@@ -14,7 +14,7 @@ let template = require('./package.json');
 // move the base package
 console.log('moving the base package');
 
-console.log( execSync("rm -rf workdir && mkdir workdir && cp -r ./node_modules/react-base/ workdir").toString() );
+console.log( execSync("rm -rf workdir && mkdir workdir && cp -r ./node_modules/react-base/* workdir").toString() );
 
 console.log('LISTING ./node_modules/react-base/');
 console.log( execSync("ls -a ./node_modules/react-base/").toString() );
@@ -59,5 +59,10 @@ console.log('LISTING workdir/src');
 console.log( execSync("ls -a workdir/src/").toString() );
 
 console.log( execSync("cp -r src/content workdir/src/content").toString() );
+
+console.log('LISTING workdir/src');
+console.log( execSync("ls -a workdir/src/").toString() );
+console.log('LISTING workdir/src/content');
+console.log( execSync("ls -a workdir/src/content").toString() );
 
 console.log('done!');
