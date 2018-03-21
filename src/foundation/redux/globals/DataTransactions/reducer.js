@@ -19,7 +19,7 @@ export const emptyTransactionState = {
   finished: false,
 
   // the data we sent for this request
-  sentData: null,
+  sentData: null
 };
 
 export default (state = initialState, action) => {
@@ -34,8 +34,8 @@ export default (state = initialState, action) => {
         {
           started: true,
           finished: false,
-          sentData: action.transactionData,
-        },
+          sentData: action.transactionData
+        }
       );
 
       return _.assign({}, state, modifiedStatePart);
@@ -53,8 +53,8 @@ export default (state = initialState, action) => {
           generalStatus: 'success',
           started: false,
           finished: true,
-          sentData: modifiedStatePart[action.mainID][action.subID].sentData,
-        },
+          sentData: modifiedStatePart[action.mainID][action.subID].sentData
+        }
       );
 
       return _.assign({}, state, modifiedStatePart);
@@ -72,8 +72,8 @@ export default (state = initialState, action) => {
           generalStatus: 'error',
           started: false,
           finished: true,
-          sentData: modifiedStatePart[action.mainID][action.subID].sentData,
-        },
+          sentData: modifiedStatePart[action.mainID][action.subID].sentData
+        }
       );
 
       return _.assign({}, state, modifiedStatePart);
@@ -89,8 +89,8 @@ export default (state = initialState, action) => {
           generalStatus: 'fatal',
           started: false,
           finished: true,
-          sentData: modifiedStatePart[action.mainID][action.subID].sentData,
-        },
+          sentData: modifiedStatePart[action.mainID][action.subID].sentData
+        }
       );
 
       return _.assign({}, state, modifiedStatePart);
@@ -101,7 +101,7 @@ export default (state = initialState, action) => {
       modifiedStatePart[action.mainID] = _.assign({}, state[action.mainID]);
       modifiedStatePart[action.mainID][action.subID] = _.assign(
         {},
-        emptyTransactionState,
+        emptyTransactionState
       );
 
       return _.assign({}, state, modifiedStatePart);

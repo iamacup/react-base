@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { connect } from 'react-redux';
 
@@ -8,16 +7,14 @@ class App extends React.Component {
   }
 
   render() {
-    return (
-      <div />
-    );
+    return <div />;
   }
 }
 
 // we have to bind the location to the state of this component so navigation updates work properly
 // (i.e. so it detects a change in the location props and thus re renderds the app)
 const mapStateToProps = state => ({
-  location: state.router.location,
+  location: state.router.location
 });
 
 const mapDispatchToProps = null;

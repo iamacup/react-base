@@ -12,7 +12,7 @@ export default (state = initialState, action) => {
       modifiedStatePart[action.mainID] = _.assign({}, state[action.mainID]);
       modifiedStatePart[action.mainID][action.subID] = _.assign(
         {},
-        action.data,
+        action.data
       );
 
       return _.assign({}, state, modifiedStatePart);

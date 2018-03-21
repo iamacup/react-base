@@ -5,6 +5,7 @@ coverage
 node_modules
 build
 public/assets
+public/webpack-assets.json
 webpack-assets.json
 webpack-stats.json
 

@@ -1,7 +1,11 @@
-
 import axios from 'axios';
 
-import { dNc, handleAuthStatus, logError, getAPIUrl } from '../../foundation/utils/utilityFunctions';
+import {
+  dNc,
+  handleAuthStatus,
+  logError,
+  getAPIUrl
+} from '../../foundation/utils/utilityFunctions';
 
 export default () => {
   let axiosInstance = axios;
@@ -10,8 +14,8 @@ export default () => {
     const https = require('https');
     axiosInstance = axios.create({
       httpsAgent: new https.Agent({
-        rejectUnauthorized: false,
-      }),
+        rejectUnauthorized: false
+      })
     });
   }
 
@@ -25,14 +29,14 @@ export default () => {
       dispatch,
       apiSuccess,
       apiFail,
-      apiTotalFail,
+      apiTotalFail
     ) =>
-      new Promise((resolve) => {
+      new Promise(resolve => {
         const finalLocation = getAPIUrl() + location;
 
         axiosInstance
           .post(finalLocation, data, headers)
-          .then((res) => {
+          .then(res => {
             if (dNc(res.data.authStatus)) {
               handleAuthStatus(res.data.authStatus, dispatch);
             }
@@ -49,12 +53,12 @@ export default () => {
               resolve('success');
             }
           })
-          .catch((err) => {
+          .catch(err => {
             logError(err);
             apiTotalFail(err);
             resolve('success');
           });
-      }),
+      })
   };
 
   return result;

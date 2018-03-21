@@ -5,13 +5,13 @@ export const doDataTransaction = (
   mainID,
   subID,
   cookieData,
-  transactionData,
+  transactionData
 ) => (dispatch, getState, axios) => {
   dispatch({
     type: 'GLOBAL_TRANSACTION_START',
     mainID,
     subID,
-    transactionData,
+    transactionData
   });
 
   return axios.easySendFunction(
@@ -21,34 +21,37 @@ export const doDataTransaction = (
     dispatch,
 
     // success function
-    data => dispatch({
-      type: 'GLOBAL_TRANSACTION_SUCCESS',
-      data,
-      mainID,
-      subID,
-    }),
+    data =>
+      dispatch({
+        type: 'GLOBAL_TRANSACTION_SUCCESS',
+        data,
+        mainID,
+        subID
+      }),
 
     // error function
-    data => dispatch({
-      type: 'GLOBAL_TRANSACTION_ERROR',
-      data,
-      mainID,
-      subID,
-    }),
+    data =>
+      dispatch({
+        type: 'GLOBAL_TRANSACTION_ERROR',
+        data,
+        mainID,
+        subID
+      }),
 
     // really bad error function (mangled or no resposne)
-    () => dispatch({
-      type: 'GLOBAL_TRANSACTION_FAILURE',
-      mainID,
-      subID,
-    }),
+    () =>
+      dispatch({
+        type: 'GLOBAL_TRANSACTION_FAILURE',
+        mainID,
+        subID
+      })
   );
 };
 
-export const doReset = (mainID, subID) => (dispatch) => {
+export const doReset = (mainID, subID) => dispatch => {
   dispatch({
     type: 'GLOBAL_TRANSACTION_RESET',
     mainID,
-    subID,
+    subID
   });
 };

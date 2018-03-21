@@ -1,4 +1,3 @@
-
 export default {
   htmlAttributes: { lang: 'en' },
   title: 'AlumniBase',
@@ -6,35 +5,36 @@ export default {
   meta: [
     {
       name: 'description',
-      content: '.',
+      content: '.'
     },
     {
       name: 'twitter:card',
-      content: 'summary',
+      content: 'summary'
     },
     {
       name: 'twitter:site',
-      content: '@alumnibase',
+      content: '@alumnibase'
     },
     {
       name: 'twitter:creator',
-      content: '@alumnibase',
+      content: '@alumnibase'
     },
     {
       property: 'og:url',
-      content: 'https://www.alumnnibaseapp.com/',
+      content: 'https://www.alumnnibaseapp.com/'
     },
     {
       property: 'og:title',
-      content: 'AlumniBase - Better Alumni Data',
+      content: 'AlumniBase - Better Alumni Data'
     },
     {
       property: 'og:description',
-      content: 'Alumni Outcomes Data that is easy to collect and use - solve TEF headaches, widen participation and demonstrate value.',
+      content:
+        'Alumni Outcomes Data that is easy to collect and use - solve TEF headaches, widen participation and demonstrate value.'
     },
     {
       property: 'og:image',
-      content: 'https://files.alumnibaseapp.com/images/ogicon.png',
-    },
-  ],
+      content: 'https://files.alumnibaseapp.com/images/ogicon.png'
+    }
+  ]
 };

@@ -1,4 +1,3 @@
-
 import axios from 'axios';
 
 // eslint-disable-next-line import/prefer-default-export
@@ -64,11 +63,11 @@ export function logError(data) {
   axios
     .post(getAPIUrl() + 'api/general/logError', { data })
     // eslint-disable-next-line no-unused-vars
-    .then((res) => {
+    .then(res => {
       // do nothing
     })
     // eslint-disable-next-line no-unused-vars
-    .catch((err) => {
+    .catch(err => {
       // do nothing
     });
 }
@@ -77,4 +76,3 @@ export function getAuthenticationCookie() {
   const Cookies = require('js-cookie');
   return Cookies.get('authentication');
 }
-

@@ -7,13 +7,11 @@ export default (state = initialState, action) => {
     case 'GLOBAL_STORE_SINGLE_UPDATE': {
       const modifiedStatePart = {};
 
-
       modifiedStatePart[action.mainID] = _.assign(
         {},
         state[action.mainID],
-        action.data,
+        action.data
       );
-
 
       return _.assign({}, state, modifiedStatePart);
     }

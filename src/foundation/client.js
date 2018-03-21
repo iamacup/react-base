@@ -1,52 +1,47 @@
 import React from 'react';
-import createHistory from 'history/createBrowserHistory';
-import { hydrate, unmountComponentAtNode } from 'react-dom';
+import { hydrate } from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 import { Provider } from 'react-redux';
+import createHistory from 'history/createBrowserHistory';
 import { ConnectedRouter } from 'react-router-redux';
+import { renderRoutes } from 'react-router-config';
+import { loadComponents } from 'loadable-components';
 
-import RedBox from 'redbox-react';
 import configureStore from '../foundation/redux/store';
+import routes from '../content/bootstrap/routes';
 
-// Get initial state from server-side rendering
+// Get the initial state from server-side rendering
 const initialState = window.__INITIAL_STATE__;
 const history = createHistory();
 const store = configureStore(history, initialState);
-const mountNode = document.getElementById('react-view');
 
-const renderApp = () => {
-  const App = require('../foundation/app').default;
-
+const render = (Routes: Array<Object>) => {
   hydrate(
-    <AppContainer errorReporter={({ error }) => <RedBox error={error} />}>
+    <AppContainer>
       <Provider store={store}>
         <ConnectedRouter history={history}>
-          <App />
+          {renderRoutes(Routes)}
         </ConnectedRouter>
       </Provider>
     </AppContainer>,
-    mountNode,
+    document.getElementById('react-view')
   );
 };
 
-// Enable hot reload by react-hot-loader
-if (module.hot) {
-  const reRenderApp = () => {
-    try {
-      renderApp();
-    } catch (error) {
-      // not sure if this should be a render of a hydrate?
-      hydrate(<RedBox error={error} />, mountNode);
-    }
-  };
+// Load all components needed before starting rendering (loadable-components setup)
+loadComponents().then(() => {
+  render(routes);
+});
 
-  module.hot.accept('../foundation/app', () => {
-    setImmediate(() => {
-      // Preventing the hot reloading error from react-router
-      unmountComponentAtNode(mountNode);
-      reRenderApp();
-    });
+if (module.hot) {
+  // Enable webpack hot module replacement for routes
+  module.hot.accept('../content/bootstrap/routes', () => {
+    try {
+      const nextRoutes = require('../content/bootstrap/routes').default;
+
+      render(nextRoutes);
+    } catch (error) {
+      console.error(`==> 😭  Routes hot reloading error ${error}`);
+    }
   });
 }
-
-renderApp();

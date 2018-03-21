@@ -1,32 +1,18 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { renderRoutes } from 'react-router-config';
 import Helmet from 'react-helmet';
 
-import config from '../../foundation/config';
-import routes from '../../content/bootstrap/routes';
 import Bootstrap from '../../content/bootstrap/AppGlobals';
 
-const App = () => {
-  const routeWithSubRoutes = route => (
-    <Route
-      key={route.path}
-      exact={route.exact || false}
-      path={route.path}
-      render={props => (
-        // Pass the sub-routes down to keep nesting
-        // TODO i think we pass down the reduxAction which we do not need to..?
-        <route.component {...props} routes={route.routes} />
-      )}
-    />
-  );
+import config from './../foundation/config';
 
-  return (
-    <div>
-      <Helmet {...config.app} />
-      <Switch>{routes.map(route => routeWithSubRoutes(route))}</Switch>
-      <Bootstrap />
-    </div>
-  );
-};
+type Props = { route: Object };
 
-export default App;
+export default ({ route }: Props) => (
+  <div className={styles.App}>
+    <Helmet {...config.app} />
+    <Bootstrap />
+    {/* child routes won't render without this */}
+    {renderRoutes(route.routes)}
+  </div>
+);

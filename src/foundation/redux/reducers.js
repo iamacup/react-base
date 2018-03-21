@@ -12,7 +12,7 @@ const foundationReducers = {
   router,
   dataTransactions,
   dataStoreMulti,
-  dataStoreSingle,
+  dataStoreSingle
 };
 
 // these become the names on the global state object

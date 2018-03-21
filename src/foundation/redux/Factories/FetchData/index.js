@@ -8,7 +8,10 @@ import * as fetchActions from '../../../../foundation/redux/globals/DataTransact
 import SmallSectionError from '../../../../content/components/Errors/smallSection';
 import LoadingArea from '../../../../content/components/Loading';
 
-import { getAuthenticationCookie, dNc } from '../../../../content/scripts/custom/utilities';
+import {
+  getAuthenticationCookie,
+  dNc
+} from '../../../../content/scripts/custom/utilities';
 
 class FetchData extends React.Component {
   componentDidMount() {
@@ -22,12 +25,19 @@ class FetchData extends React.Component {
 
     const { stateSubID } = this.props;
 
-    if (!dNc(prevProps.reduxState_this[stateSubID]) && dNc(this.props.reduxState_this[stateSubID])) {
+    if (
+      !dNc(prevProps.reduxState_this[stateSubID]) &&
+      dNc(this.props.reduxState_this[stateSubID])
+    ) {
       // if the state has been populated
       this.handleCallbacks();
-    } else if (dNc(prevProps.reduxState_this[stateSubID]) &&
+    } else if (
+      dNc(prevProps.reduxState_this[stateSubID]) &&
       dNc(this.props.reduxState_this[stateSubID]) &&
-      !_.isEqual(prevProps.reduxState_this[stateSubID], this.props.reduxState_this[stateSubID])
+      !_.isEqual(
+        prevProps.reduxState_this[stateSubID],
+        this.props.reduxState_this[stateSubID]
+      )
     ) {
       // if the two states are different
       this.handleCallbacks();
@@ -39,12 +49,18 @@ class FetchData extends React.Component {
 
     // we only reset if the thing is active!
     // check that there is some sent data present on the state
-    if (active && dNc(this.props.reduxState_this[stateSubID]) && dNc(this.props.reduxState_this[stateSubID].sentData)) {
+    if (
+      active &&
+      dNc(this.props.reduxState_this[stateSubID]) &&
+      dNc(this.props.reduxState_this[stateSubID].sentData)
+    ) {
       const { sentData } = this.props.reduxState_this[stateSubID];
 
       // if it's not started and the send data is different to the sent data then we reset
-      if (this.props.reduxState_this[stateSubID].started === false &&
-        !_.isEqual(sentData, sendData)) {
+      if (
+        this.props.reduxState_this[stateSubID].started === false &&
+        !_.isEqual(sentData, sendData)
+      ) {
         // we refresh the data by dfoing a reset and forcing a new fetch
         this.props.reduxAction_doReset(stateSubID);
 
@@ -69,7 +85,7 @@ class FetchData extends React.Component {
         fetchURL,
         stateSubID,
         getAuthenticationCookie(),
-        sendData,
+        sendData
       );
     }
   }
@@ -113,7 +129,9 @@ class FetchData extends React.Component {
     const { stateSubID } = this.props;
 
     if (dNc(this.props.reduxState_this[stateSubID])) {
-      ({ generalStatus, payload, statusCode } = this.props.reduxState_this[stateSubID]);
+      ({ generalStatus, payload, statusCode } = this.props.reduxState_this[
+        stateSubID
+      ]);
     }
 
     if (generalStatus === 'fatal') {
@@ -150,7 +168,13 @@ class FetchData extends React.Component {
       if (typeof Viewer === 'object') {
         component = Viewer;
       } else {
-        component = <Viewer data={payload} statusCode={statusCode} {...this.props.viewerProps} />;
+        component = (
+          <Viewer
+            data={payload}
+            statusCode={statusCode}
+            {...this.props.viewerProps}
+          />
+        );
       }
     } else {
       component = <LoadingArea />;
@@ -174,7 +198,7 @@ FetchData.propTypes = {
   fatalCallback: PropTypes.func,
   errorCallback: PropTypes.func,
   successCallback: PropTypes.func,
-  resetCallback: PropTypes.func,
+  resetCallback: PropTypes.func
 };
 
 FetchData.defaultProps = {
@@ -189,12 +213,12 @@ FetchData.defaultProps = {
   stateSubID: 'default',
   noRender: false,
   viewer: null,
-  sendData: {},
+  sendData: {}
 };
 
 export default function fetchDataBuilder(stateMainID) {
   const mapStateToProps = state => ({
-    reduxState_this: state.dataTransactions[stateMainID],
+    reduxState_this: state.dataTransactions[stateMainID]
   });
 
   const mapDispatchToProps = dispatch => ({
@@ -205,11 +229,11 @@ export default function fetchDataBuilder(stateMainID) {
           stateMainID,
           stateSubID,
           cookieData,
-          data,
-        ),
+          data
+        )
       ),
     reduxAction_doReset: stateSubID =>
-      dispatch(fetchActions.doReset(stateMainID, stateSubID)),
+      dispatch(fetchActions.doReset(stateMainID, stateSubID))
   });
 
   return connect(mapStateToProps, mapDispatchToProps)(FetchData);

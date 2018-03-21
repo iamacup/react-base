@@ -1,9 +1,8 @@
-
 const result = {
   headTop: [],
   headBottom: [],
   bodyTop: [],
-  bodyBottom: [],
+  bodyBottom: []
 };
 
 export default result;
