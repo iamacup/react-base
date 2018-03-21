@@ -1,6 +1,6 @@
 {
   "watch": [
-    "index.js",
+    "./index.js",
     "tools/webpack/",
     "src/server.js",
     "src/utils/Html.js"
