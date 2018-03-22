@@ -41,13 +41,20 @@ console.log('Starting sync');
 console.log( execSync("rm -rf workdir/src/content").toString() );
 console.log( execSync("rm -rf workdir/src/includes").toString() );
 
+console.log( execSync("rm -rf workdir/.tmp").toString() );
+console.log( execSync("mkdir -p workdir/.tmp").toString() );
+
 console.log( execSync("cp -r src/includes workdir/src/includes 2>/dev/null || :").toString() );
 
 
-// we execute this syncronously
-//exec("yarn sync-files --watch src/content workdir/src/content");
 
-const sync = spawn('yarn', ['sync-files', '--watch', 'src/content', 'workdir/src/content']);
+
+
+
+
+
+
+const sync = spawn('yarn', ['node', 'mergeSourceToWorkdir.js']);
 
 sync.stdout.on('data', (data) => {
   console.log(`${data}`);
@@ -62,10 +69,32 @@ sync.on('close', (code) => {
 });
 
 
+const revSync = spawn('yarn', ['node', 'mergeWorkdirToSource.js']);
+
+revSync.stdout.on('data', (data) => {
+  console.log(`${data}`);
+});
+
+revSync.stderr.on('data', (data) => {
+  console.log(`${data}`);
+});
+
+revSync.on('close', (code) => {
+  console.log(`sync process exited with code ${code}`);
+});
+
+
+
 //we pause for a bit to make sure the sync is done
-console.log('sleeping!');
-console.log( execSync("sleep 15").toString() );
+console.log('sleeping to wait for sync to be done!');
+console.log( execSync("sleep 10").toString() );
 console.log('woke up!');
+
+//we used to use syncing but that does not work properly because we can't get feedback changes (linting) so we try symlinks instead
+//var lnCommand = 'ln -s ' + process.cwd() + '/src/content' + ' ' + process.cwd() + '/workdir/src/content';
+//console.log( execSync(lnCommand).toString() );
+
+
 
 // run the build
 console.log('Running build command');
