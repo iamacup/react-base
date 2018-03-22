@@ -69,6 +69,13 @@ sync.on('close', (code) => {
 });
 
 
+//we pause for a bit to make sure the sync is done
+console.log('sleeping to wait for sync to be done!');
+console.log( execSync("sleep 5").toString() );
+console.log('woke up!');
+
+
+
 const revSync = spawn('yarn', ['node', 'mergeWorkdirToSource.js']);
 
 revSync.stdout.on('data', (data) => {
@@ -84,11 +91,13 @@ revSync.on('close', (code) => {
 });
 
 
-
 //we pause for a bit to make sure the sync is done
-console.log('sleeping to wait for sync to be done!');
-console.log( execSync("sleep 10").toString() );
+console.log('waiting for second sync to be done');
+console.log( execSync("sleep 5").toString() );
 console.log('woke up!');
+
+
+
 
 //we used to use syncing but that does not work properly because we can't get feedback changes (linting) so we try symlinks instead
 //var lnCommand = 'ln -s ' + process.cwd() + '/src/content' + ' ' + process.cwd() + '/workdir/src/content';
