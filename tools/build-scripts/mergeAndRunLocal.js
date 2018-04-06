@@ -54,20 +54,25 @@ console.log( execSync("cp -r src/includes workdir/src/includes 2>/dev/null || :"
 
 
 
-const sync = spawn('yarn', ['node', 'mergeSourceToWorkdir.js']);
+const syncFunc = (selfFunc) => {
+  const sync = spawn('yarn', ['node', 'mergeSourceToWorkdir.js']);
 
-sync.stdout.on('data', (data) => {
-  console.log(`${data}`);
-});
+  sync.stdout.on('data', (data) => {
+    console.log(`${data}`);
+  });
 
-sync.stderr.on('data', (data) => {
-  console.log(`${data}`);
-});
+  sync.stderr.on('data', (data) => {
+    console.log(`${data}`);
+  });
 
-sync.on('close', (code) => {
-  console.log(`sync process exited with code ${code}`);
-});
+  sync.on('close', (code) => {
+    console.log(`sync process exited with code ${code}`);
+    console.log('restarting');
+    selfFunc();
+  });
+};
 
+syncFunc(syncFunc);
 
 //we pause for a bit to make sure the sync is done
 console.log('sleeping to wait for sync to be done!');
@@ -75,20 +80,25 @@ console.log( execSync("sleep 5").toString() );
 console.log('woke up!');
 
 
+const revSyncFunc = (selfFunc) => {
+  const revSync = spawn('yarn', ['node', 'mergeWorkdirToSource.js']);
 
-const revSync = spawn('yarn', ['node', 'mergeWorkdirToSource.js']);
+  revSync.stdout.on('data', (data) => {
+    console.log(`${data}`);
+  });
 
-revSync.stdout.on('data', (data) => {
-  console.log(`${data}`);
-});
+  revSync.stderr.on('data', (data) => {
+    console.log(`${data}`);
+  });
 
-revSync.stderr.on('data', (data) => {
-  console.log(`${data}`);
-});
+  revSync.on('close', (code) => {
+    console.log(`revSync process exited with code ${code}`);
+    console.log('restarting');
+    selfFunc();
+  });
+};
 
-revSync.on('close', (code) => {
-  console.log(`sync process exited with code ${code}`);
-});
+revSyncFunc(revSyncFunc);
 
 
 //we pause for a bit to make sure the sync is done
