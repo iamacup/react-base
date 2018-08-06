@@ -1,6 +1,14 @@
 
 <div align="center">
 
+# THIS PROJECT IS CURRENTLY DORMANT, THE REPOSITORY IS NOT CURRENTLY BEING MAINTAINED.
+
+</div>
+
+---
+
+<div align="center">
+
   [![dependencies Status](https://david-dm.org/iamacup/react-base/status.svg)](https://david-dm.org/iamacup/react-base)
   [![devDependencies Status](https://david-dm.org/iamacup/react-base/dev-status.svg)](https://david-dm.org/iamacup/react-base?type=dev)
   [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
